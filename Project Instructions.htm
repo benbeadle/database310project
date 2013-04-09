@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0050)http://faculty.cse.tamu.edu/ajiang/310Project.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+
+   
+   <meta name="Author" content="Anxiao (Andrew) Jiang">
+   <meta name="GENERATOR" content="Microsoft FrontPage 5.0"><title>CPSC689</title><style type="text/css"></style><style type="text/css">@media print { #feedlyMiniIcon { display: none; } }</style></head><body class=" hasGoogleVoiceExt">
+&nbsp;
+<center><table border="0" cellpadding="0" cellspacing="0" cols="1" width="100%">
+<tbody><tr align="center" valign="CENTER">
+<td align="center" valign="CENTER" width="100%"><b><font size="+2">CSCE 
+310 / 603&nbsp;&nbsp; Database Systems <font color="#0000ff">Project</font></font></b></td>
+</tr>
+</tbody></table>
+<p>&nbsp;</p>
+</center>
+
+<p><u><b><font size="4">Overview:</font></b><font size="4"> </font></u>
+</p><p>In this programming project, you and your teammates will build a substantial 
+database of your choice with a real-world application. It has five parts:</p><p><b>
+Part 1:</b> Choose a project and design an E/R diagram.</p>
+<p><b>Part 2:</b> Design the relational schema.</p>
+<p><b>Part 3:</b> Create an actual database using MySQL.</p>
+<p><b>Part 4:</b> Queries and updates to the database.</p>
+<p><b>Part 5:</b> Embedded SQL.</p>
+<p>The project counts as 25% of your grade. Each part is 5% of your grade.<span style="text-decoration: underline;"><span style="font-weight: bold;"><br>
+</span></span></p>
+<p><br>
+<span style="text-decoration: underline;"><span style="font-weight: bold;"></span></span></p>
+<p><u>
+<b><font size="4">Submission:</font></b></u></p><p>Turn in all parts of the project 
+online using the CSNet.<br>
+</p><p>Every team should 
+choose one student as the <i>team communicator</i>, who will be responsible for 
+turning in the project. For each project part, only one copy needs to be turned 
+in electronically. However, as a team project, it is important for every student 
+to participate in all aspects of the project. <span style="font-weight: bold; text-decoration: underline;">So with each part of the project, 
+the team communicator should send an email (with all team members copied on the email) to the TA describing the 
+participation of each team member (that is, describe the job of each person with one sentence).</span> Part of your grade will be based on how evenly everyone participated.</p>
+<p><br>
+</p>
+<p>
+<u>
+<b><font size="4">MySQL:</font></b></u></p><p>We will use the DBMS MySQL for the project. You should start 
+getting familiar with MySQL via their <a href="http://dev.mysql.com/doc/">web 
+page</a>. A good place to start is the
+<a href="http://dev.mysql.com/doc/mysql/en/tutorial.html">tutorial</a>.</p><p>Every 
+student needs to apply for a MySQL database account in the CSE department. Here 
+is the <a href="https://wiki.cse.tamu.edu/index.php/How_to_Use_MySQL">link</a> showing you how to apply for the account.</p><p>&nbsp;</p><hr><p><b>
+<font size="5">Part 1: E/R Diagram. </font></b>
+<font size="4">(Due: 12:45pm on Thursday, 03/28/2013)</font></p><p>Pick a database application that you really like 
+working on! Then design an E/R diagram for it. The E/R diagram should have about 
+five entity sets and about five relationship sets. Include different kind of 
+relationships (e.g., many-one, many-many) and different kinds of data (strings, 
+integers, etc.). You can, but are not required to, use features such as weak 
+entity sets, "is-a" relationships, or roles.</p><p>1. Write a short (one paragraph 
+or so) description of the database application. The description should be brief 
+and relatively informal. If there is any unique or particularly difficult 
+aspects of your proposed application, please point it out. Your description will 
+be graded on its suitability and conciseness.</p><p>2. Specify an E/R diagram for 
+your proposed database. Underline the key attributes for entity sets and include 
+arrowheads indicating the multiplicity of the relationship sets. If there are 
+weak entity sets of "is-a" relationships, be sure to notate them appropriately.</p><p>
+You should turn in: <b>1.</b> <b>A written description of the database 
+application.</b> Turn it in in CSNET as a separate file. <b>2.</b> <b>The E/R 
+diagram.</b> Turn it in in CSNET as a separate file.<br>
+</p><hr><p><font size="5"><b>Part 2: Relational Schema.</b></font><font size="4">&nbsp; (Due: 12:45pm on Thursday, 04/04/2013)</font></p><p>In this part, you will produce a 
+relational schema for the E/R diagram that you submitted last time.</p><p>Using the 
+method for translating an E/R diagram to relations, produce a set of relation 
+schemas for your database design. Be sure to underline key attributes in the 
+relations schemas.</p><p>For each relation, specify all the nontrivial functional 
+dependencies. </p><p>Is each relation in your schema in Boyce-Codd Normal Form (BCNF) 
+with respect to the functional dependencies you specified? If not, decompose the 
+relation into smaller relations so that each relation is in BCNF. Again, 
+underline the key attributes, and specify all the nontrivial functional 
+dependencies for the new relations.</p><p>Are there any nontrivial multivalued 
+dependencies (MVDs) in your relations? If so, specify the MVDs, then decompose 
+the relations into smaller ones so that each relation is in the Fourth Normal 
+Form (4NF). Again, underline the key attributes.</p><p>Now that you have decomposed 
+your relations as far as possible, are there any relations that can be combined 
+without introducing redundancy (i.e., without creating BCNF or 4NF violations)? 
+If so, combine them.</p><p>Is there anything you still don't like about the schema 
+(e.g., attribute names, relation structure, etc.)? If so, modify the relational 
+schema to something you prefer.&nbsp; </p><p>You should turn in: <b>1. Schemas for 
+all relations in your database, with keys underlined. </b>Turn it in in CSNET as a 
+separate file. <b>2. For each relation, list all the nontrivial functional 
+dependencies. </b>Turn it in in CSNET as a separate file.<br>
+</p><hr><p><b><font size="5">Part 3: Creating the Database in MySQL. </font></b>
+<font size="4">(Due: 12:45pm on Thursday, 04/11/2013)</font></p><p>In this part of the project, you will 
+create a relational schema for your database in the MySQL database system, and 
+you will populate the tables in your database with initial data sets. </p>
+<ol>
+  <li>Familiarize yourself with the MySQL relational DBMS by reading the on-line 
+  documentation (referenced above in this webpage), logging into MySQL, trying 
+  some of the examples in the document, and experimenting with the various 
+  commands. You don't need to turn anything in for this part.
+  <p>&nbsp;
+  </p></li><li>Create relations for your database based on your final relational schema 
+  from Part 2. Use the
+  <a href="http://dev.mysql.com/doc/mysql/en/creating-tables.html">CREATE TABLE</a> 
+  command to specify each relation, its attributes and attribute types. If you 
+  have an attribute that represents a date and/or time, you may want to look at
+  <a href="http://dev.mysql.com/doc/mysql/en/date-and-time-types.html">this page</a>.
+  <p>&nbsp;
+  </p></li><li>Turn in a script log showing a MySQL session in which your relations are 
+  created successfully, as described next. For each relation in your database, 
+  create an execution script file and a few (approximately 5-10) records of 
+  "realistic" data. Then execute the script file from the mysql command line 
+  using the \T option. Turn in a list showing the contents of the files you 
+  created, the successful loading of the data into MySQL, and the execution of 
+  "SELECT *" commands to show the contents of each relation.
+  <p>&nbsp;
+  </p></li><li>Write a program in any programming language you like that creates large 
+  files of records for each of your relations. If you have available real data 
+  for your relations, then your program will need to transform the data into 
+  files of records conforming to your relational schema and to MySQL's load 
+  format. The rest of you will need to write a program to fabricate data: your 
+  program will generate either random or nonrandom (e.g., sequential) records 
+  conforming to your schema. Note that it is both fine and expected for your 
+  data values, strings especially, to be meaningless gibberish. The point of 
+  generating large amounts of data is so that you can experiment with a database 
+  of realistic size, rather than the small "toy" databases often used in 
+  classes. The data you generate and load should be on the order of:
+  <ul>
+    <li>At least two relations with thousands of tuples </li>
+    <li>At least one relation with hundreds of tuples </li>
+  </ul>
+  <p>If your application naturally includes relations that are expected to be 
+  relatively small (e.g., schools within a university), then it is fine to use 
+  some small relations, but please ensure that you have relations of the sizes 
+  prescribed above as well. When writing a program to fabricate data, there are 
+  two important points to keep in mind:
+  </p><ul>
+    <li>Make sure not to generate duplicate values for key attributes. </li>
+    <li>Your database almost certainly includes relations that are expected to 
+    join with each other. For example, you may have a Student relation with 
+    attribute courseNum that's expected to join with attribute number in 
+    relation Course. When generating data, be sure to generate values that 
+    actually do join - otherwise all of your interesting queries will have empty 
+    results! There are a couple of ways to properly generate joining values. One 
+    way is to generate records for multiple relations (e.g., Course and Student) 
+    at the same time. Another way is to generate the records for one relation 
+    first, and then use the joining values for the other relation. For example, 
+    you could generate records for relation Course first, then use the 
+    Course.number values when creating values for Student.courseNum. </li>
+  </ul>
+  <p>Turn in your program code for generating or transforming data, a small 
+  sample of the records generated for each relation (5 or so records per 
+  relation), and a script log showing the successful loading of your data into 
+  MySQL. 
+</p></li></ol>
+<p>You should turn in:<table style="border-collapse: collapse;" border="1" bordercolor="#111111" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td width="100%">1. <b>a script file containing SQL commands for creating 
+    each table in you database application (createTable.sql)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">2. <b>a script log file showing a MySQL session in which 
+    your tables are created successfully (createLog.txt)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">3. <b>a few (approximately 5-10) records of "realistic" 
+    data per relation (realData.txt or realData.doc or realData.pdf)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">4. <b>the <i>commented</i> source code for your program to 
+    generate or transform data.</b></td>
+  </tr>
+  <tr>
+    <td width="100%">5. <b>written explanation of how your program works. This 
+    is not line-by-line commenting, but a high level global idea of how you 
+    generate your synthetic data. (explanation.txt or explanation.doc or 
+    explanation.pdf)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">6. <b>a small sample of the "synthetic" records generated 
+    for each relation by your program (5 or so records per relation) (syntheticData.txt 
+    or syntheticData.doc or syntheticData.pdf)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">7. <b>a script file containing SQL commands for inserting 
+    synthetic data (approximately 5-10 records as a sample) generated by your 
+    program (insertSyntheticData.sql)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">8. <b>a script file containing SQL commands (SELECT * FROM 
+    each table_name) for selecting the synthetic data per each table (selectSyntheticData.sql)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">9. <b>a script log file showing a MySQL session in which 
+    the SELECT commands are run successfully (selectSyntheticDataLog.txt)</b></td>
+  </tr>
+  
+</tbody></table>
+</p><p>&nbsp;</p><hr><p>
+<b><font size="5">Part 4: Queries and Updates. </font></b>
+<font size="4">(Due: 12:45pm on Thursday, 04/18/2013)</font></p><p>In this part of the project, you will issue 
+SQL queries and updates against your database. Since you will be modifying your data as part of this 
+assignment, we strongly suggest that you adopt a routine for getting repeated 
+"fresh" starts with MySQL. You need to save and keep all SQL commands such as 
+creating/dropping database, creating tables, inserting real data and/or 
+synthetic data, querying tuples, updating tuples, etc., in script files. If 
+needed, you just can run these script files again in order to re-setup your 
+database. </p>
+<p>Develop and test: </p>
+<ul>
+  <li>At least <b>ten </b>SQL data retrieval (select) commands (<b> three </b>
+  general queries, <b>two </b>"join" queries (related with three tables), <b>one
+  </b>"union" query, <b>one </b>"group by" query, <b>one </b>"order by" query,
+  <b>one </b>"DISTINCT" query and <b>one </b>"Aggregate" query). </li>
+  <li>At least <b>six </b>SQL data modification (<b> two </b>update, <b>two </b>
+  deletion, <b>two </b>insertion) commands </li>
+</ul>
+<p>Please note: </p>
+<ul>
+  <li>For this assignment you will be invoking your SQL commands interactively 
+  through mysql. Certainly you should build a script file, rather than typing in 
+  the queries each time you run them.
+  <p>&nbsp;
+  </p></li><li>Please write "interesting" queries, in particular,
+  <ul>
+    <li><b>three </b>general queries with at least two conditions (For example, 
+    SELECT t1.c1, t2.c2 FROM t1, t2 WHERE t1.c1 &gt; 10 and t2.name = `Texas`),
+    </li>
+    <li><b>two </b>"join" queries (related with three tables), </li>
+    <li><b>one </b>"union" query, </li>
+    <li><b>one </b>"group by" query, </li>
+    <li><b>one </b>"order by" query, </li>
+    <li><b>one </b>"DISTINCT" query, and </li>
+    <li><b>one </b>"Aggregate" query). </li>
+  </ul>
+  <p>You should try to use most or all of the SQL constructs discussed in class 
+  and in the textbook. You will not receive full credit if your queries and 
+  modifications are all extremely simple. </p>
+  <p>&nbsp;
+  </p></li><li>We suggest that you experiment with your SQL commands on your small 
+  hand-created database before running them on the large database for which you 
+  generated data. Initial debugging is much easier when you're operating on 
+  small amounts of data. Once you're confident that your commands are working, 
+  try them on your large database. We do expect that the commands you turn in 
+  work properly on both your small and large databases.
+  <p>&nbsp;
+  </p></li><li>If you discover that most or all of your "interesting" queries return an 
+  empty answer on your large database, check whether you followed the 
+  instructions in Part 3 for generating data values that join properly. You may 
+  need to modify your data generator.
+  <p>&nbsp;
+  </p></li><li>Turn in a copy of all of your SQL commands, along with a script 
+  illustrating their execution on both your small and large databases. Your 
+  script should be sufficient to convince us that your commands run 
+  successfully, but you can and should truncate query results after a few lines. 
+  Please do not turn in query results that are hundreds of lines long. </li>
+</ul>
+<p>
+&nbsp;</p><p>
+You should turn in:<table style="border-collapse: collapse;" border="1" bordercolor="#111111" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td width="100%">1. <b>a copy of all of your SQL commands (query.sql and update.sql)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">2. <b>a script log file showing a MySQL session in which 
+    your SQL commands are run successfully on both your small and large 
+    databases (queryLog.txt and updateLog.txt)</b></td>
+  </tr>
+  
+</tbody></table>
+</p><p>&nbsp;</p>
+<hr><p>
+<font size="5">
+<b>Part 5: Using Java and Embedded SQL. </b></font>
+<font size="4">(Due: 12:45pm on Thursday, 04/25/2013)</font></p><p>In this part of the project, you will 
+interact with your database from an external program. Your task is to build a 
+moderately user-friendly interactive application program front end to your 
+database using the Java programming language. Your program should consist of a 
+continuous loop in which: </p>
+<ul>
+  <li>A list of at least five alternative options is offered to the user. (An 
+  additional alternative should be quit.) </li>
+  <li>The user selects an alternative. </li>
+  <li>The system prompts the user for appropriate input values. </li>
+  <li>The system accesses the database to perform the appropriate queries and/or 
+  modifications. </li>
+  <li>Data or an appropriate acknowledgment is returned to the user. </li>
+</ul>
+<p>You should include both queries and modifications among your options. As in 
+Part 4, please include some "interesting" queries or modifications, i.e., 
+operations that require some of the more complex SQL constructs such as 
+subqueries, aggregates, set operators, etc. As a general example, if your 
+database is a campus applicant database, then your interface might include in 
+its menu a number of useful queries on the database, with both input and output 
+in a format more convenient and pleasing than raw interactive SQL. Some queries 
+perform statistical analysis requiring multiple levels of grouping, other 
+queries are simpler. </p>
+<ul>
+  <li>Insert a new student record. </li>
+  <li>Insert a new application record. </li>
+  <li>Update a student's address, GPA, or SAT. </li>
+  <li>Update an application's decision field based on user input. </li>
+  <li>Update application decision fields automatically, admitting students based 
+  on a combination of numeric values and quotas for each campus and/or major.
+  </li>
+  <li>Quit. </li>
+</ul>
+<p>Your application code should interact with the database using the JDBC 
+call-level interface for Java programs. You can refer to following links. </p>
+<ul>
+  <li>
+  <a href="http://dev.mysql.com/doc/refman/5.1/en/connector-j-usagenotes-basic.html">Basic JDBC 
+  concepts </a></li>
+  <li><a href="http://dev.mysql.com/doc/mysql/en/connector-j-reference.html">JDBC 
+  Reference </a></li>
+  <li><a href="http://www.kitebird.com/articles/jdbc.html">Writing JDBC 
+  Applications with MySQL </a></li>
+</ul>
+<p>We are not expecting anything particularly fancy in terms of the interface 
+itself. For example, in Java a menu printed via print function is fine. Also, 
+handling of SQL errors can be quite simple. You can write a routine that just 
+prints the error message from MySQL, or model your error handler after one of 
+our sample programs.</p>
+<p>
+&nbsp;</p><p>
+You should turn in:<table style="border-collapse: collapse;" border="1" bordercolor="#111111" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td width="100%">1. <b>written explanation of how your program works. This 
+    is not line-by-line commenting, but a high level global idea of what is 
+    going on in your program. (explanation.txt or explanation.doc or 
+    explanation.pdf)</b></td>
+  </tr>
+  <tr>
+    <td width="100%">2. <b><i>commented</i> source code for your programs</b></td>
+  </tr>
+  <tr>
+    <td width="100%">3. <b>Your embedded SQL based application must provide the 
+    following functions: connecting to a database, querying, inserting, deleting 
+    and updating. The more complex the queries that your application can handle, 
+    the more credit you will get. Turn in a file called captured-screen.doc (or 
+    .txt or .pdf) that contains screen captures showing examples of running each 
+    of your functions. Here is a way to capture a screen shot:
+    </b><ol>
+<b>      </b><li><b>Display the needed screen as full size on the monitor. </b></li>
+<b>      </b><li><b>Push "Print Screen" button on keyboard. </b></li>
+<b>      </b><li><b><text>Click right mouse button and then click paste button in Wordpad or 
+      <a href="http://securelink.sendori.com/r?key=Microsoft&spid=1908&output=redirect&ix=1" target="_blank"><span id="inlineTextHighlight" style="visibility: visible;">Microsoft</span></a> word (not Notepad) (Control-V button). </text></b></li>
+<b>    </b></ol>
+<b>    </b></td>
+  </tr>
+  
+</tbody></table>
+</p><p>&nbsp;</p>
+<hr><p>
+<b>Acknowledgement to: <i>
+<a href="http://www.cse.ucsc.edu/classes/cmps180/Winter02">Arthur Keller</a></i>
+</b>of UC Santa Cruz and<i> <b>
+<a href="http://faculty.cs.tamu.edu/welch/teaching/310.f05/project.html">
+Jennifer Welch</a></b></i>, TAMU, for their orignal versions of the project 
+design.<br>&nbsp;
+</p><script type="text/javascript" src="./Project Instructions_files/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="./Project Instructions_files/inlinekeywords.js"></script>
+<script type="text/javascript" src="./Project Instructions_files/pconfig.js"></script>
+<script type="text/javascript">
+ var sndpID = '10705';
+ var sndgID = '{2C686A86-A11E-4864-AE0E-3B11460FD04F}';
+ var CorrectedDomain;
+ var OriginalDomain;
+ function sendoriInline2(){function b(a,b,d){if((a==-1||!c(d.charAt(a)))&&(b>=d.length||!c(d.charAt(b)))){return true}return false}function c(a){var b=a.charCodeAt(0);if(b>47&&b<58||b>64&&b<91||b>96&&b<123){return true}return false}var a=window.location!=window.parent.location?true:false;if(a){return false}var d=jQuery.noConflict();d(document).ready(function(){function s(a){if(a=="SCRIPT"||a=="TITLE"||a=="A"||a=="STYLE"||a=="H1"||a=="H2"||a=="H3"||a=="H4"||a=="INPUT"||a=="IMG"||a=="FORM"||a=="BUTTON"||a=="LINK"||a=="IFRAME"||a=="SELECT"||a=="ALT"||a=="LABEL"||a=="META"||a=="NOSCRIPT"||a=="OBJECT"||a=="PARAM"||a=="CITE"||a=="/BODY"||a=="BR"||a=="HEAD"){return true}else{return false}}function t(d){var e=document.URL;var i=new Object;i.substituted=false;if(f==true){return i}var l=0;var m;textlower=d.toLowerCase();l=0;var p="</span></a>";i.newText="";var q=0;for(o=0;o<d.length&&a<b;++o){if(g[d]!=null||d[o]==" "||d[o]==";"||d[o]==","||d[o]=="."||d[o]=="<"||d[o]==">"||d[o]=="?"){if(g[d]!=null){l=0;o=d.length}if(h[textlower]!=undefined&&h[textlower]!=""){f=true;break}word=d.substring(l,o);wordlower=word.toLowerCase();if(g[word]!=null&&h[wordlower]==undefined&&(e.indexOf(g[word])<0||g[word]=="keyword")){adbrandterm=word;if(word.indexOf("&")>=0){adbrandterm=word.replace("&","")}if(word.indexOf("'")>=0){adbrandterm=word.replace("'","")}if(i.newText==""){preElement=d.substring(0,l)}else{preElement=i.newText.substring(0,l+q)}postElement=d.substring(o);if(g[word]=="keyword"){if(!n){highlightStartTag="<a href='http://securelink.sendori.com/r?key="+adbrandterm+"&spid=1908&output=redirect&ix=1' target='_blank'><span id='inlineTextHighlight'>"}else if(n&&k!=undefined&&k!=""){highlightStartTag="<a href='http://securelink.sendori.com/r?key="+adbrandterm+"&spid="+k+"&output=redirect&ix=1' target='_blank'><span id='inlineTextHighlight'>"}else continue}else{if(!n){highlightStartTag="<a href='http://securelink.sendori.com/br?key="+adbrandterm+"&spid=1853&output=redirect&ix=1' target='_blank'><span id='inlineTextHighlight'>"}else if(n&&j!=undefined&&j!=""){highlightStartTag="<a href='http://securelink.sendori.com/br?key="+adbrandterm+"&spid="+j+"&output=redirect&ix=1' target='_blank'><span id='inlineTextHighlight'>"}else continue}p="</span></a>";i.newText=preElement+highlightStartTag+word+p+postElement;i.substituted=true;q+=highlightStartTag.length+p.length;c[c.length]="http://l.sendori.com/stbin/lognow.cgi/?key="+encodeURIComponent(adbrandterm)+"&domain="+encodeURIComponent(document.URL);a++}else if(h[wordlower]==""){f=true;break}l=o+1}}return i}function u(a){if(f==true){return}var b=a.nodeValue;var c=a.parentNode;var d=t(b);if(d.substituted==true){var e=document.createElement("text");e.innerHTML=d.newText;c.replaceChild(e,a)}}function v(a){if(s(a.nodeName)){return}if(a.nodeName=="#text"&&d.trim(a.nodeValue).length>0){u(a)}if(a.hasChildNodes()){for(var b=0;b<a.childNodes.length;b++){v(a.childNodes[b])}}}var a=0;var b=3;var c=new Array;var e=document.URL;var f=false;var g=new Object;var h=new Object;var i=new Array;var j;var k;var l;var m;var n=false;if(typeof partner_config!=="undefined"){for(var o=0;o<partner_config.products.length;o++){var p=partner_config.products[o].id;if(sndpID==p){n=true;j=partner_config.products[o].inline_brand;k=partner_config.products[o].inline_keyword;if((j==undefined||j=="")&&(k==undefined||k=="")){return}}}}for(var o=0;o<inline_keyword_obj.inlinebrands.length;o++){var q=inline_keyword_obj.inlinebrands[o].brandword;var r=inline_keyword_obj.inlinebrands[o].hostname;g[q]=r}for(var o=0;o<blacklist_keywords.blacklist.length;o++){var q=blacklist_keywords.blacklist[o].keyword;h[q]=""}if(typeof console==="undefined"||typeof console.log==="undefined"){console={};console.log=function(){}}d.expr[":"].HasBlackListURL=function(a,b,c){var e=false;d.each(blacklist_urls.urls,function(b){urlstring=this.url.toString().toLowerCase();if(d(a).attr("href")!=null&&d(a).attr("href")!=="undefined"&&d(a).attr("href").toString().toLowerCase().indexOf(urlstring)>=0){e=true}});return e};if(d("a:HasBlackListURL('')").length>0){f=true}var w=document.getElementsByTagName("body");for(var x=0;x<w.length;x++){var y=w[x];v(y)}d("[class*=nav_pop_li]").find("a[href*=securelink.sendori.com/]").each(function(a){var b=d(this).text();d(this).replaceWith(b)});if(!f){d("HTML").find("span#inlineTextHighlight").css("visibility","visible");/*for(var x=0;x<c.length;x++){d.ajax({url:c[x],type:"GET",dataType:"jsonp",cache:false,error:function(){}})}*/}else{d("a[href*=securelink.sendori.com/]").each(function(a){var b=d(this).text();d(this).replaceWith(b)})}})}function sendoriSlider(){function j(){var a=false;if(CorrectedDomain!=undefined&&OriginalDomain!=undefined){if(c!=undefined&&c!=""){for(var e=0;e<slider_keywords.slidertext.length;e++){var f=slider_keywords.slidertext[e].BRAND;if(CorrectedDomain.indexOf(f.toLowerCase())>=0){brand_category=slider_keywords.slidertext[e].CATEGORY;if(c!=undefined&&c!="")r(brand_category,"NX",c,"");else r(brand_category,"NX",1860,"");a=true;break}}}if(!a&&d!=undefined&&d=="Y"){l(CorrectedDomain,"NX")}}if(b!=undefined&&b!=""){if(!m()&&!n()&&!o()&&!p())return false;if(o()){query=q("p")}else{query=q("q")}if(query==undefined||query==null||query==""){return false}for(var e=0;e<slider_keywords.slidertext.length;e++){var f=slider_keywords.slidertext[e].BRAND;if(f.toLowerCase()==query.toLowerCase()){faviconsrc=slider_keywords.slidertext[e].FAVICONSRC;if(b!=undefined&&b!="")r(f,"SERP",b,"");else r(f,"SERP",1871,faviconsrc)}}}}function k(a,b,c,e,f,g){divToInsert="<div id='slider_container' style='display:none'><div id='slider_header'>";if(a=="NX"&&d!=undefined&&d=="Y"){divToInsert+="<div id='notification_alert'></div>"+"<div id='notification_message'></div>"}divToInsert+="<div style='left:auto; position:absolute; right:0;margin-right:5px;margin-top:4px;'><div id='snd_logo'></div>"+"<div id='icon_close'></div></div></div>"+"<div id='slider_body'>";var i=h.browser;if(i.msie&&i.version.slice(0,3)=="7.0"){divToInsert+="<div id='favicon'></div><div style='margin-left:30px;padding-top:3px;'>"}else{h("#favicon").css("height","16px");divToInsert+="<div id='favicon'></div><div style='margin-left:30px;padding-top:3px;position:absolute;'>"}divToInsert+="<div id='ad_title'></div>"+"<div id='ad_body'></div></div>"+"<div id='bt_learn'></div>"+"</div>"+"<div id='slider_footer'>"+"<div id='ad_url'></div></div>"+"</div>";divToInsert+="<div style='display:none;'><img src='//pixel.quantserve.com/pixel/p-fbiS6Ydv_HyB-.gif' border='0' height='1' width='1' alt='Quantcast'/></div>";var j=j||[];j.push({qacct:"p-fbiS6Ydv_HyB-"});var k=document.createElement("script");k.type="text/javascript";k.src="http://edge.quantserve.com/quant.js";k.async=true;var l=document.getElementsByTagName("script")[0];l.parentNode.insertBefore(k,l);divToInsert+="<div style='display:inline;'><img height='1' width='1' style='border-style:none;' src='//googleads.g.doubleclick.net/pagead/viewthroughconversion/1001837251/?value=0&label=FqiuCJWt7AMQw6Xb3QM&guid=ON&script=0'/></div>";var m=1001837251;var n="FqiuCJWt7AMQw6Xb3QM";var o=window.google_tag_params;var p=true;var q=document.createElement("script");q.type="text/javascript";q.src="www.googleadservices.com/pagead/conversion.js";q.async=true;var l=document.getElementsByTagName("script")[0];l.parentNode.insertBefore(q,l);h(document.body).append(divToInsert);if(h("#slider_container").is(":visible")){}else{h("#slider_container").slideDown(1500)}h("#icon_close").click(function(){h("#slider_container").slideUp(1500)});if(a=="NX"){h("#notification_message").html(s());h("#icon_close").click(function(){h("#slider_container").slideUp(1500)})}h("#ad_title").html(b);h("#ad_body").html(c);h("#ad_url").html("Sponsored by: "+e);if(g=="G"){favicon_url="url(http://www.google.com/s2/favicons?domain="+e+")"}else{favicon_url="url("+g+")"}h("#favicon").css("background-image",favicon_url);h("#slider_body").click(function(){window.open(f)});h("#ad_url").hover(function(){h(this).css("cursor","pointer")},function(){h(this).css("cursor","auto")});h("#snd_logo").hover(function(){h(this).css("cursor","pointer")},function(){h(this).css("cursor","auto")});h("#ad_url").click(function(){window.open(f)});h("#snd_logo").click(function(){window.open("http://support.sendori.com/home")})}function l(){var a="<div id='Nx_slider_container' style='display:none'>"+"<div id='slider_header'>"+"<div id='notification_alert'></div>"+"<div id='notification_message'></div>"+"<div style='left: auto; position: absolute; right:0;margin-right: 5px;margin-top:4px;'><div id='snd_logo'></div>"+"<div id='icon_close'></div></div>"+"</div>"+"</div>";a+="<div style='display:none;'><img src='//pixel.quantserve.com/pixel/p-fbiS6Ydv_HyB-.gif' border='0' height='1' width='1' alt='Quantcast'/></div>";var b=b||[];b.push({qacct:"p-fbiS6Ydv_HyB-"});var c=document.createElement("script");c.type="text/javascript";c.src="http://edge.quantserve.com/quant.js";c.async=true;var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d);a+="<div style='display:inline;'><img height='1' width='1' style='border-style:none;' src='//googleads.g.doubleclick.net/pagead/viewthroughconversion/1001837251/?value=0&label=FqiuCJWt7AMQw6Xb3QM&guid=ON&script=0'/></div>";var e=1001837251;var f="FqiuCJWt7AMQw6Xb3QM";var g=window.google_tag_params;var i=true;var j=document.createElement("script");j.type="text/javascript";j.src="www.googleadservices.com/pagead/conversion.js";j.async=true;var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(j,d);h(document.body).append(a);if(h("#Nx_slider_container").is(":visible")){h("#Nx_slider_container").slideUp(1500)}else if(!h("slider_container").is(":visible")){h("#Nx_slider_container").slideDown(1500)}if(h("slider_container").is(":visible")){h("#Nx_slider_container").css("display","none")}h("#icon_close").click(function(){h("#Nx_slider_container").slideUp(1500)});h("#snd_logo").hover(function(){h(this).css("cursor","pointer")},function(){h(this).css("cursor","auto")});h("#snd_logo").click(function(){window.open("http://support.sendori.com/home")});h("#notification_message").html(s())}function m(){if(document.referrer.indexOf("www.google.com/url")!=-1&&document.URL.indexOf("google.com")==-1){return true}return false}function n(){if(document.referrer.indexOf("www.bing.com/search")!=-1&&document.URL.indexOf("bing.com/search")==-1){return true}return false}function o(){if(document.referrer.indexOf("search.yahoo.com/search")!=-1&&document.URL.indexOf("search.yahoo.com")==-1){return true}return false}function p(){if(document.referrer.indexOf("www.ask.com/web")!=-1&&document.URL.indexOf("ask.com/web")==-1){return true}return false}function q(a){var b;var c=document.referrer;var d=c.split("&");for(var e=0;e<d.length;e++){var f=d[e].indexOf(a+"=");arg=d[e].substring(0,f+1);if(f!=-1&&(arg==a||arg.indexOf("?"+a)!=-1)){b=d[e].substring(f+2)}else continue}return unescape(b)}function r(a,b,c,e){h.ajax({url:"http://securelink.sendori.com/r?key="+a+"&spid="+c+"&output=json&rf="+document.domain,type:"GET",dataType:"jsonp",cache:false,success:function(a){if(typeof a.ads[0]!=="undefined"){if(a.ads[0].displayURL.indexOf("http")>=0||a.ads[0].displayURL.indexOf("https")>=0){displayURL=a.ads[0].displayURL.substring(a.ads[0].displayURL.indexOf("//")+2)}else displayURL=a.ads[0].displayURL;if(a.ads[0].url.indexOf("http")<0){clickURL="http://"+a.ads[0].url}else clickURL=a.ads[0].url;if(b=="NX"){e="G";for(var c=0;c<slider_keywords.slidertext.length;c++){var f=slider_keywords.slidertext[c].BRAND;if(displayURL.indexOf(f)>=0){e=slider_keywords.slidertext[c].FAVICONSRC}}}k(b,a.ads[0].title,a.ads[0].description,displayURL,clickURL,e)}else if(b=="NX"&&d!=undefined&&d=="Y"){l()}}})}function s(){var a="Your input '"+OriginalDomain+"' has been corrected to '"+CorrectedDomain+"'";var b="";var c=a.length>63?63:a.length;for(i=0;i<c;++i){b+=a.charAt(i)}if(c==63)b+="...";return b}var a=false;var b;var c;var d;if(typeof partner_config!=="undefined"){for(var e=0;e<partner_config.products.length;e++){var f=partner_config.products[e].id;if(sndpID==f){a=true;b=partner_config.products[e].slider_referrer;c=partner_config.products[e].slider_Nx;d=partner_config.products[e].Ntfcn;if((d==undefined||d=="")&&(c==undefined||c=="")&&(b==undefined||b=="")){return}else break}}}if(!a){return}var g=window.location!=window.parent.location?true:false;var h=jQuery.noConflict(true);h(document).ready(function(){if(!g){j()}})}sendoriInline2();sendoriSlider()
+ </script>
+<style type="text/css">
+#inlineTextHighlight{background:none repeat scroll 0 50% transparent;text-decoration:underline;display:inline;visibility:none;color:blue !important;font-family:Arial;cursor:pointer;line-height:1.5em}
+#slider_header{height:26px;width:510px;background-image:url(http://cdn.sendori.com/images/bg_header.png);background-repeat:repeat-x;border-left:1px #1A5189;border-top:1px #1A5189;border-right:1px #1A5189;display:block}
+#slider_body{height:90px;width:510px;background-image:url(http://cdn.sendori.com/images/bg_body.png);background-repeat:repeat-x;border-top:1px #438ECE;border-bottom:1px #438ECE;border-left:1px #1A5189;border-right:1px #1A5189;display:block;cursor:pointer}
+#slider_footer{height:30px;width:510px;background-image:url(http://cdn.sendori.com/images/bg_footer.png);background-repeat:repeat-x;border-left:1px #1A5189;border-right:1px #1A5189;border-bottom:1px #1A5189;display:block;cursor:auto}
+#bt_learn{background-image:url(http://cdn.sendori.com/images/btn_learn.png);background-repeat:no-repeat;height:90px;margin-right:5px;width:112px;margin-top:60px;left:auto;right:0;top:0;position:absolute;}
+#icon_alert{height:16px;width:16px;background-image:url(http://cdn.sendori.com/images/icon_alert.png);padding:5px}
+#icon_close{background-image:url(http://cdn.sendori.com/images/icon_close.png);background-repeat:no-repeat;display:block;float:left;height:16px;width:16px;}
+#favicon{background-position:center top;background-repeat:no-repeat;height:90px;margin-left:5px;margin-top:5px;width:16px;float:left;position:relative;}
+#ad_title{font-family:Helvetica;font-size:13pt;font-weight:700;color:#000;text-decoration:underline;margin-right:122px;text-align:left}
+#ad_body{font-family:Helvetica;font-size:11pt;color:#333;padding-top:5px;margin-right:125px;text-align:left;}
+#ad_url{color:#FFF;float:left;font-family:Helvetica;font-size:10pt;margin-right:10px;margin-left:10px;padding-top:6px;cursor:auto}
+#snd_logo{background-image:url(http://cdn.sendori.com/images/logo.png); background-repeat:no-repeat;height:17px;width:65px;cursor:auto;float:left;margin-right:10px;margin-top:1px;}
+#notification_message{color:#FFF;float:left;font-family:Helvetica;font-size:8pt;font-weight:700;padding-left:0;margin-top:5px;text-decoration:none;}
+#notification_alert{background-image:url(http://cdn.sendori.com/images/icon_alert.png);background-position:center center;background-repeat:no-repeat;float:left;height:16px;padding-left:10px;padding-top:5px;width:16px}
+#slider_container{width:510px;height:146px;display:none;position:fixed;left:50%;bottom:0;margin-left:-255px;z-index:9999999999;border-radius:4px 4px 0 0;-webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;box-shadow:0 0 9px #515151;-webkit-box-shadow:0 0 9px #515151;-moz-box-shadow:0 0 9px #515151}
+#Nx_slider_container{width:510px;height:26px;display:none;position:fixed;left:50%;bottom:0;margin-left:-255px;border-radius:4px 4px 0 0;-webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;z-index:9999999999;border-left:1px #1A5189;border-top:1px #1A5189;border-right:1px #1A5189;box-shadow:0 0 9px #515151;-webkit-box-shadow:0 0 9px #515151;-moz-box-shadow:0 0 9px #515151}
+</style><div style="display: none;" id="orbiousinterest_dialog"><div class="container">  <div class="header">Mark as unread</div>  URL <input type="text" value="" class="url" readonly="readonly"><br>  Title <input type="text" value="" class="title"><br>  Tags <input type="text" value="tags, seperated by commas" class="tags empty">  <div class="buttons">     <input type="button" value="Cancel" class="cancel">     <input type="button" value="Save" class="save">  </div></div></div><a id="ORBVIOUS_DOMWindowHost" href="http://faculty.cse.tamu.edu/ajiang/310Project.html#orbiousinterest_dialog"></a><img id="feedlyMiniIcon" title="feedly mini" style="position: fixed; bottom: 14px; right: 14px; z-index: 99; cursor: pointer; border: 0px; -webkit-transition: opacity 0.3s ease; transition: opacity 0.3s ease; visibility: visible; width: 24px; height: 24px; max-height: 24px; max-width: 24px; overflow: hidden; display: block; padding: 0px; opacity: 0.35;" width="24" height="24" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYlJREFUeNrMVD1rwlAUPfkwBBxFKQQlDhmjqzj4F9w7FfwThZaW9n8UnDrrn1BEXNTBRQQhEE1ERRR0Sd990A7VaKJJ6YHzEu4N99z3zrsRGo2GAuCF8YFRQzSwGOuM7zJb3hgfES2o0SdGSWRLDfGhRgLpGAXS4q0VCoUCBEHwzd8skM/nUSqVoCjKybz8O1CtVn2LeZ4H27YxnU6xXC6x3+95PJPJoFKpoN1uY7vdnhfww3w+x3A4xGaz4d3quo5sNvuTTyaTXKTb7cJ13csCzWbzKKaqKj/zXC4HSZKO8iRcLpcxGAwwmUzC7UDTNBSLRSQSiVAeyUGNpM4v4XA4oNfr8eMMLJBKpWCaJn9fLBawLAur1Qq73Y6b/H0pyNyrTDYMA7PZDKPRCOv1+uQ3ZCqZe9UcOI6DTqfjW5zMbLVa3Bu6RaE9GI/HZ/P9fp8/qfipYROj+ukEnuQgEx0GImKGHGSC//UO/kTAibG+QwIfMQrUyeRXusaM94x3ERW2GT8Zn78EGACRmoKUJhB1TQAAAABJRU5ErkJggg=="></body></html>
