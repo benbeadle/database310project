@@ -7,7 +7,7 @@ CREATE TABLE Student (
     PRIMARY KEY(UIN)
 );
 
-/* A Course that >=1 Student(s) are enrolled in*/
+/* A Course that >=1 Student(s) are EnrolledIn*/
 CREATE TABLE Course (
     Subject CHAR(4),
     CourseNumber INT,
@@ -22,7 +22,7 @@ CREATE TABLE EnrolledIn (
     ClassSubject CHAR(4),
     ClassNumber INT,
     UIN INT,
-    Grade CHAR(25),
+    Grade CHAR(1),
     PRIMARY KEY(Semester, ClassSubject, ClassNumber, UIN)
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE StudentOrganization (
     StudentOrganizationID INT,
     Name CHAR(30),
     Category CHAR(30),
-    PRIMARY KEY(StudentOrganization)
+    PRIMARY KEY(StudentOrganizationID)
 );
 
 /*The connection that a Student is a MemberOf a StudentOrganization */
