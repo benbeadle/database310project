@@ -5,7 +5,6 @@
 
 int main(){
 	srand(time(0));
-	cout<<"Generating records..."<<endl;
 
 	int facultyCount = rand() % 1000 + 1000;	//average 1500 faculty
 	int studentCount = facultyCount * 5 + rand() % 1000 - rand() % 1000;	//average 7.5k students
@@ -15,36 +14,37 @@ int main(){
 	cout<<facultyCount<<"  Faculty\n"<<studentCount<<"  Students \n"<<organizationCount<<"  Groups\n"<<courseCount<<"  Courses\n";
 
 	//create our base objects for the university
+	cout<<"Hiring Faculty..."<<endl;
 	for(int i = 0; i < facultyCount; i++){
 		faculty.push_back(Faculty());
 	}
+	cout<<"Accepting Student Applications..."<<endl;
 	for(int i = 0; i < studentCount; i++){
 		students.push_back(Student());
 	}
+	cout<<"Founding Organizations..."<<endl;
 	for(int i = 0; i < organizationCount; i++){
 		organizations.push_back(Organization());
 	}
-
+	cout<<"Designing Curriculum..."<<endl;
 	unordered_set<string> uniqueCourses;
 	for(int i = 0; i < courseCount; i++){
 
 		Class newClass;
 		string key;
-	//	int test = 0;
 		do{
 			newClass = Class();	//regenerate a class if it already exists
 			key = newClass.subject + itos(newClass.number);
-	//		test++;
 		}while(uniqueCourses.find(key) != uniqueCourses.end());	//loop until we fail to find a course with this key value.  then we'll know it's unique
 
 		uniqueCourses.insert(uniqueCourses.begin(), key);
 		courses.push_back(newClass);
-	//	if(test > 1) cout<<"Duplicate generated\n";
 	}
 
-	//create relations between these base objects (a.k.a the hard part).  I have a better way, but here is my prototypical setup
+	//create relations between these base objects (a.k.a the hard part).
+	cout<<"Opening Registration & Open House..."<<endl;
 	for(int i = 0; i < studentCount; i++){
-		for(int j = 0; j < rand() % 20; j++){//average 10 enrollments over the course of 4 semesters
+		for(int j = 0; j < (rand() % 20)+1; j++){//average 10 enrollments over the course of 4 semesters
 			enrollment.push_back(EnrolledIn(students[i]));
 		}
 
@@ -52,13 +52,35 @@ int main(){
 			membership.push_back(MemberOf(students[i]));
 		}
 	}
+	cout<<"Assigning Professors..."<<endl;
 	for(int i = 0; i < facultyCount; i++){
 		for(int j = 0; j < rand() % 4; j++){	//faculty can teach up to 3 courses
 			instruction.push_back(Teaches(faculty[i]));
 		}		
 	}
+	cout<<"Volunteering Faculty to Organizations..."<<endl;
 	for(int i = 0; i < organizationCount; i++){
 		if(rand() % 5 == 0) leadership.push_back(Leads());	//a quarter of organizations have faculty leadership
+	}
+
+	cout<<"Done"<<endl;
+	cout<<"Checking constraints..."<<endl;
+
+	for(int i = 0; i < courseCount; i++){
+		if(courses[i].size == 0){
+			cout<<"Empty course found\n";
+			enrollment.push_back(EnrolledIn(&courses[i]));
+		}
+		if(!courses[i].hasProf){
+			cout<<"Untaught course found\n";
+			instruction.push_back(Teaches(&courses[i]));
+		}
+	}
+	for(int i = 0; i < organizationCount; i++){
+		if(organizations[i].size == 0){
+			cout<<"Empty organization found\n";
+			membership.push_back(MemberOf(&organizations[i]));
+		}
 	}
 
 	cout<<"Done"<<endl;

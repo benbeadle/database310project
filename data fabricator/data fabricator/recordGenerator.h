@@ -46,7 +46,6 @@ struct Faculty{
 	int salary;
 	string name;
 
-	int workLoad;
 	bool leadsOrg;
 
 	Faculty(){
@@ -54,7 +53,6 @@ struct Faculty{
 		salary = (rand() % 100000) + 50000;
 		name = generateString(rand()%6+1) + " " + generateString(rand()%10+1);
 
-		workLoad = 0;
 		leadsOrg = false;
 	}
 };
@@ -64,8 +62,6 @@ struct Student{
 	string name;
 	string major;
 	int advisorID;
-
-	int courseLoad;	//necessary for logical values
 	
 	Student(){
 		UIN = universalID++;
@@ -85,10 +81,14 @@ struct Organization{
 	string category;
 	int ID;
 
+	int size;
+
 	Organization(){
 		name = generateString(rand()%20);
 		category = generateString(rand()%6);
 		ID = universalOrgID++;
+
+		size = 0;
 	}
 };
 
@@ -137,20 +137,13 @@ struct EnrolledIn{
 		UIN = student.UIN;	
 		grade = rand() % 5;
 	}
-	/*
-	EnrolledIn(){
 
-		Class *targetCourse;
-		do{
-			targetCourse = &courses[rand() % courses.size()];
-		}while(targetCourse->size > 200);
-		targetCourse->size++;
+	EnrolledIn(Class *targetCourse){
 
 		Student *enrolledStudent;
-		do{
-			enrolledStudent = &students[rand() % students.size()];
-		}while(enrolledStudent->courseLoad >= 18);
-		enrolledStudent->courseLoad += targetCourse->hours;
+		enrolledStudent = &students[rand() % students.size()];
+
+		targetCourse->size++;
 
 		semester = rand() % 4;
 		subject = targetCourse->subject;
@@ -158,7 +151,7 @@ struct EnrolledIn{
 		UIN = enrolledStudent->UIN;	
 		grade = rand() % 5;
 	}
-	*/
+
 };
 
 struct Teaches{
@@ -182,26 +175,17 @@ struct Teaches{
 		semester = rand() % 4;
 	}
 
-	/*
-	Teaches(){
-		Class *targetCourse;
-		do{
-			targetCourse = &courses[rand() % courses.size()];
-		}while(targetCourse->hasProf);
+	Teaches(Class *targetCourse){
 		targetCourse->hasProf = true;
 
 		Faculty *professor;
-		do{
-			professor = &faculty[rand() % faculty.size()];
-		}while(professor->workLoad > 3);
-		professor->workLoad ++;
+		professor = &faculty[rand() % faculty.size()];
 
 		subject = targetCourse->subject;
 		number = targetCourse->number;
 		facultyID = professor->ID;
 		semester = rand() % 4;
 	}
-	*/
 };
 
 struct MemberOf{
@@ -214,18 +198,15 @@ struct MemberOf{
 	MemberOf(Student student){	
 		Organization *org;
 		org = &organizations[rand() % organizations.size()];	//unlimited members
-
+		org->size++;
 
 		UIN = student.UIN;
 		studentOrgID = org->ID;
 		joinedMo = rand() % 12 + 1;
 		joinedYr = rand() % 6 + 2008;
 	}
-	/*
-	MemberOf(){
-		Organization *org;
-		org = &organizations[rand() % organizations.size()];	//unlimited members
 
+	MemberOf(Organization *org){
 		Student *student;
 		student = &students[rand() % students.size()];		//a student can be in unlimited organizations
 
@@ -233,8 +214,7 @@ struct MemberOf{
 		studentOrgID = org->ID;
 		joinedMo = rand() % 12 + 1;
 		joinedYr = rand() % 6 + 2008;
-	}
-	*/
+	}	
 };
 
 struct Leads{
