@@ -6,10 +6,10 @@
 int main(){
 	srand(time(0));
 
-	int facultyCount = rand() % 1000 + 1000;	//average 1500 faculty
-	int studentCount = facultyCount * 5 + rand() % 1000 - rand() % 1000;	//average 7.5k students
-	int organizationCount = studentCount / 25 + rand() % 200 - rand() % 200;//average 300 organizations
-	int courseCount = facultyCount / 5;			//average 300 courses offered
+	int facultyCount = rand() % 2000 + 1000;	//average 2500 faculty
+	int studentCount = facultyCount * 5 + rand() % 1000 - rand() % 1000;	//average 12.5k students
+	int organizationCount = studentCount / 25 + rand() % 200 - rand() % 200;//average 500 organizations
+	int courseCount = facultyCount / 5;			//average 500 courses offered
 
 	cout<<facultyCount<<"  Faculty\n"<<studentCount<<"  Students \n"<<organizationCount<<"  Groups\n"<<courseCount<<"  Courses\n";
 
@@ -27,7 +27,7 @@ int main(){
 		organizations.push_back(Organization());
 	}
 	cout<<"Designing Curriculum..."<<endl;
-	unordered_set<string> uniqueCourses;
+	unordered_set<string> uniqueCourses;	//the set stores only unique values and determines duplicates in O(1) time.  This is how we keep from regenerating the same class twice
 	for(int i = 0; i < courseCount; i++){
 
 		Class newClass;
@@ -63,28 +63,26 @@ int main(){
 		if(rand() % 5 == 0) leadership.push_back(Leads());	//a quarter of organizations have faculty leadership
 	}
 
-	cout<<"Done"<<endl;
 	cout<<"Checking constraints..."<<endl;
 
 	for(int i = 0; i < courseCount; i++){
 		if(courses[i].size == 0){
-			cout<<"Empty course found\n";
+			cout<<"Empty course fixed\n";
 			enrollment.push_back(EnrolledIn(&courses[i]));
 		}
 		if(!courses[i].hasProf){
-			cout<<"Untaught course found\n";
+			cout<<"Untaught course fixed\n";
 			instruction.push_back(Teaches(&courses[i]));
 		}
 	}
 	for(int i = 0; i < organizationCount; i++){
 		if(organizations[i].size == 0){
-			cout<<"Empty organization found\n";
+			cout<<"Empty organization fixed\n";
 			membership.push_back(MemberOf(&organizations[i]));
 		}
 	}
 
-	cout<<"Done"<<endl;
-	cout<<"Writing data to file...\n"<<endl;
+	cout<<"Writing data to file...\n"<<endl;	//self explanatory vvvvvv
 	openFile();
 
 	for(int i = 0; i < facultyCount; i++){
@@ -113,6 +111,5 @@ int main(){
 	}
 	
 	closeFile();
-	cout<<"Done"<<endl;
-	cin.get();
+	cout<<"All data generated"<<endl;
 }

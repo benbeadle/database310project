@@ -46,12 +46,12 @@ struct Faculty{
 	int salary;
 	string name;
 
-	bool leadsOrg;
+	bool leadsOrg;	//all values separated by double newline are for relation satisfaction and won't actually go in the table
 
 	Faculty(){
 		ID = universalID++;
 		salary = (rand() % 100000) + 50000;
-		name = generateString(rand()%6+1) + " " + generateString(rand()%10+1);
+		name = generateString((rand()%6)+1) + " " + generateString((rand()%10)+1);
 
 		leadsOrg = false;
 	}
@@ -65,7 +65,7 @@ struct Student{
 	
 	Student(){
 		UIN = universalID++;
-		name = generateString(rand()%6+1) + " " + generateString(rand()%10+1);
+		name = generateString((rand()%6)+1) + " " + generateString((rand()%10)+1);
 
 		major = (char)(rand()%26 + 65);
 		major.insert(major.end(), (char)(rand()%26 + 65));
@@ -138,7 +138,7 @@ struct EnrolledIn{
 		grade = rand() % 5;
 	}
 
-	EnrolledIn(Class *targetCourse){
+	EnrolledIn(Class *targetCourse){	//the fixer constructor - if a course has no students, one is picked at random and assigned the subject
 
 		Student *enrolledStudent;
 		enrolledStudent = &students[rand() % students.size()];
@@ -162,7 +162,8 @@ struct Teaches{
 
 	Teaches(Faculty faculty){
 		Class *targetCourse;
-		int tryLimit = 0;
+
+		int tryLimit = 0;	//we could get in an endless loop without this
 		do{
 			targetCourse = &courses[rand() % courses.size()];
 			tryLimit++;
@@ -175,7 +176,7 @@ struct Teaches{
 		semester = rand() % 4;
 	}
 
-	Teaches(Class *targetCourse){
+	Teaches(Class *targetCourse){	//the fixer constructor - if a course has no faculty, one is picked at random and assigned the job
 		targetCourse->hasProf = true;
 
 		Faculty *professor;
@@ -191,7 +192,7 @@ struct Teaches{
 struct MemberOf{
 	int UIN;
 	int studentOrgID;
-	int joinedMo;
+	int joinedMo;	//the plan for the join date is to convert these values to strings, and then concatenate them with a slash in the middle
 	int joinedYr;
 
 
@@ -240,7 +241,7 @@ struct Leads{
 	}
 };
 
-string itosem(int semCode){
+string itosem(int semCode){		//inspired by the C itoa() function
 	string semester;
 	switch(semCode){
 		case 0:
