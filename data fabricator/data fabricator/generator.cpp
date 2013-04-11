@@ -1,4 +1,4 @@
-#include <iostream>
+#include <unordered_set>
 #include "recordGenerator.h"
 #include "tableInsertMethods.h"
 
@@ -24,10 +24,22 @@ int main(){
 	for(int i = 0; i < organizationCount; i++){
 		organizations.push_back(Organization());
 	}
-	for(int i = 0; i < courseCount; i++){
-		//Class newCourse();
 
-		courses.push_back(Class());
+	unordered_set<string> uniqueCourses;
+	for(int i = 0; i < courseCount; i++){
+
+		Class newClass;
+		string key;
+		int test = 0;
+		do{
+			newClass = Class();	//regenerate a class if it already exists
+			key = newClass.subject + itos(newClass.number);
+			test++;
+		}while(uniqueCourses.find(key) != uniqueCourses.end());	//loop until we fail to find a course with this key value.  then we'll know it's unique
+
+		uniqueCourses.insert(uniqueCourses.begin(), key);
+		courses.push_back(newClass);
+		if(test > 1) cout<<"Duplicate generated\n";
 	}
 
 	//create relations between these base objects (a.k.a the hard part).  I have a better way, but here is my prototypical setup
@@ -59,8 +71,19 @@ int main(){
 	for(int i = 0; i < courseCount; i++){
 		writeCourse(courses[i].subject, courses[i].number, courses[i].hours, courses[i].title);
 	}
-
-
+	for(int i = 0; i < enrollment.size(); i++){
+		writeEnrolledIn(itosem(enrollment[i].semester), enrollment[i].subject, enrollment[i].number, enrollment[i].UIN, itograde(enrollment[i].grade));
+	}
+	for(int i = 0; i < instruction.size(); i++){
+		writeTeaches(instruction[i].subject, instruction[i].number, instruction[i].facultyID, itosem(instruction[i].semester));
+	}
+	for(int i = 0; i < leadership.size(); i++){
+		writeLeads(leadership[i].facultyID ,leadership[i].studentOrgID, itos(leadership[i].joinedMo)+"/"+itos(leadership[i].joinedYr));
+	}
+	for(int i = 0; i < membership.size(); i++){
+		writeMemberOf(membership[i].UIN, membership[i].studentOrgID, itos(membership[i].joinedMo)+"/"+itos(membership[i].joinedYr));
+	}
+	
 	closeFile();
 	cout<<"Done"<<endl;
 	cin.get();

@@ -5,8 +5,8 @@
 
 using namespace std;
 
-static int universalID = 100000000;
-static int universalOrgID = 100;
+static int universalID = 0;
+static int universalOrgID = 0;
 
 struct Faculty;
 struct Student;
@@ -33,12 +33,11 @@ vector<MemberOf> membership;
 string generateString(int length){
 
 	string word;
-	word.insert(word.end(), (char)(rand()%26 + 65));	//first letter is capital
+	word.insert(word.end(), (char)(rand()%26 + 65));	//first letter is capitalized
 
 	for(int i = 0; i < length-1; i++){
 		word.insert(word.end(), (char)(rand()%26 + 97));
 	}
-
 	return word;
 };
 
@@ -193,7 +192,7 @@ struct MemberOf{
 		UIN = student->UIN;
 		studentOrgID = org->ID;
 		joinedMo = rand() % 12 + 1;
-		joinedYr = rand() % 5 + 2008;
+		joinedYr = rand() % 6 + 2008;
 	}
 };
 
@@ -216,6 +215,48 @@ struct Leads{
 		facultyID = leader->ID;
 		studentOrgID = org->ID;
 		joinedMo = rand() % 12 + 1;
-		joinedYr = rand() % 13 + 2000;
+		joinedYr = rand() % 14 + 2000;
 	}
 };
+
+string itosem(int semCode){
+	string semester;
+	switch(semCode){
+		case 0:
+			semester = "Fall";
+			break;
+		case 1:
+			semester = "Spring";
+			break;
+		case 2:
+			semester = "Summer I";
+			break;
+		case 3:
+			semester = "Summer II";
+			break;
+		}
+	return semester;
+}
+
+string itograde(int gradeCode){
+	string grade;
+
+	switch(gradeCode){
+		case 0:
+			grade = 'F';
+			break;
+		case 1:
+			grade = 'D';
+			break;
+		case 2:
+			grade = 'C';
+			break;
+		case 3:
+			grade = 'B';
+			break;
+		case 4:
+			grade = 'A';
+			break;
+		}
+	return grade;
+}
