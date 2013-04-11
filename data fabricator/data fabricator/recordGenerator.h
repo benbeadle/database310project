@@ -51,7 +51,7 @@ struct Faculty{
 
 	Faculty(){
 		ID = universalID++;
-		salary = (rand() % 100000) + 40000;
+		salary = (rand() % 100000) + 50000;
 		name = generateString(rand()%6+1) + " " + generateString(rand()%10+1);
 
 		workLoad = 0;
@@ -77,8 +77,6 @@ struct Student{
 		major.insert(major.end(), (char)(rand()%26 + 65));
 		
 		advisorID = faculty[rand() % faculty.size()].ID;
-
-		courseLoad = 0;
 	}
 };
 
@@ -118,9 +116,6 @@ struct Class{
 	}
 };
 
-//enum SemCode{ Fall = 0, Winter, Spring, Summer };
-//enum GradeCode { F = 0, D,C,B,A };
-
 struct EnrolledIn{
 	int semester;
 	string subject;
@@ -128,6 +123,21 @@ struct EnrolledIn{
 	int UIN;
 	int grade;
 
+	EnrolledIn(Student student){
+
+		Class *targetCourse;
+		do{
+			targetCourse = &courses[rand() % courses.size()];
+		}while(targetCourse->size > 200);
+		targetCourse->size++;
+
+		semester = rand() % 4;
+		subject = targetCourse->subject;
+		number = targetCourse->number;
+		UIN = student.UIN;	
+		grade = rand() % 5;
+	}
+	/*
 	EnrolledIn(){
 
 		Class *targetCourse;
@@ -148,6 +158,7 @@ struct EnrolledIn{
 		UIN = enrolledStudent->UIN;	
 		grade = rand() % 5;
 	}
+	*/
 };
 
 struct Teaches{
@@ -156,6 +167,22 @@ struct Teaches{
 	int facultyID;
 	int semester;
 
+	Teaches(Faculty faculty){
+		Class *targetCourse;
+		int tryLimit = 0;
+		do{
+			targetCourse = &courses[rand() % courses.size()];
+			tryLimit++;
+		}while(targetCourse->hasProf && tryLimit < 5);	//if all courses seem to be accounted for, bail out
+		targetCourse->hasProf = true;
+
+		subject = targetCourse->subject;
+		number = targetCourse->number;
+		facultyID = faculty.ID;
+		semester = rand() % 4;
+	}
+
+	/*
 	Teaches(){
 		Class *targetCourse;
 		do{
@@ -174,6 +201,7 @@ struct Teaches{
 		facultyID = professor->ID;
 		semester = rand() % 4;
 	}
+	*/
 };
 
 struct MemberOf{
@@ -182,6 +210,18 @@ struct MemberOf{
 	int joinedMo;
 	int joinedYr;
 
+
+	MemberOf(Student student){	
+		Organization *org;
+		org = &organizations[rand() % organizations.size()];	//unlimited members
+
+
+		UIN = student.UIN;
+		studentOrgID = org->ID;
+		joinedMo = rand() % 12 + 1;
+		joinedYr = rand() % 6 + 2008;
+	}
+	/*
 	MemberOf(){
 		Organization *org;
 		org = &organizations[rand() % organizations.size()];	//unlimited members
@@ -194,6 +234,7 @@ struct MemberOf{
 		joinedMo = rand() % 12 + 1;
 		joinedYr = rand() % 6 + 2008;
 	}
+	*/
 };
 
 struct Leads{

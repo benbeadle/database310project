@@ -7,10 +7,10 @@ int main(){
 	srand(time(0));
 	cout<<"Generating records..."<<endl;
 
-	int facultyCount = rand() % 2000 + 1000;	//average 2000 faculty
-	int studentCount = facultyCount * 5 + rand() % 1000 - rand() % 1000;	//average 10k students
-	int organizationCount = studentCount / 25 + rand() % 200 - rand() % 200;//average 400 organizations
-	int courseCount = facultyCount / 5;			//average 400 courses offered
+	int facultyCount = rand() % 1000 + 1000;	//average 1500 faculty
+	int studentCount = facultyCount * 5 + rand() % 1000 - rand() % 1000;	//average 7.5k students
+	int organizationCount = studentCount / 25 + rand() % 200 - rand() % 200;//average 300 organizations
+	int courseCount = facultyCount / 5;			//average 300 courses offered
 
 	cout<<facultyCount<<"  Faculty\n"<<studentCount<<"  Students \n"<<organizationCount<<"  Groups\n"<<courseCount<<"  Courses\n";
 
@@ -30,29 +30,35 @@ int main(){
 
 		Class newClass;
 		string key;
-		int test = 0;
+	//	int test = 0;
 		do{
 			newClass = Class();	//regenerate a class if it already exists
 			key = newClass.subject + itos(newClass.number);
-			test++;
+	//		test++;
 		}while(uniqueCourses.find(key) != uniqueCourses.end());	//loop until we fail to find a course with this key value.  then we'll know it's unique
 
 		uniqueCourses.insert(uniqueCourses.begin(), key);
 		courses.push_back(newClass);
-		if(test > 1) cout<<"Duplicate generated\n";
+	//	if(test > 1) cout<<"Duplicate generated\n";
 	}
 
 	//create relations between these base objects (a.k.a the hard part).  I have a better way, but here is my prototypical setup
-	for(int i = 0; i < 4 * studentCount; i++){
-		enrollment.push_back(EnrolledIn());				//4 courses per student on average
-		if(i % 4 == 0) membership.push_back(MemberOf());	//1 membership per student on average
+	for(int i = 0; i < studentCount; i++){
+		for(int j = 0; j < rand() % 20; j++){//average 10 enrollments over the course of 4 semesters
+			enrollment.push_back(EnrolledIn(students[i]));
+		}
+
+		for(int j = 0; j < rand() % 4; j++){	//up to 3 memberships per student
+			membership.push_back(MemberOf(students[i]));
+		}
 	}
-	for(int i = 0; i < courseCount; i++){
-		instruction.push_back(Teaches());
-		
+	for(int i = 0; i < facultyCount; i++){
+		for(int j = 0; j < rand() % 4; j++){	//faculty can teach up to 3 courses
+			instruction.push_back(Teaches(faculty[i]));
+		}		
 	}
-	for(int i = 0; i < rand() % facultyCount/2; i++){
-		leadership.push_back(Leads());
+	for(int i = 0; i < organizationCount; i++){
+		if(rand() % 5 == 0) leadership.push_back(Leads());	//a quarter of organizations have faculty leadership
 	}
 
 	cout<<"Done"<<endl;
