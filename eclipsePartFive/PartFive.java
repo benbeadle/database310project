@@ -24,12 +24,23 @@ public class PartFive
 		s.close ();
 	}
 	public static void two(Connection conn) throws SQLException {
-		
+		Statement s = conn.createStatement();
+
+		s.executeQuery ("SELECT Student.Name, Faculty.Name AS Advisor FROM Student, Faculty WHERE Student.Advisor=Faculty.FacultyID");
+		ResultSet rs = s.getResultSet();
+		while (rs.next ())
+		{
+		   System.out.println (
+				   rs.getString("Student.Name")
+				   + "'s advisor is '" + rs.getString("Advisor") + "'");
+		}
+		rs.close ();
+		s.close ();
 	}
 	public static void three(Connection conn) throws SQLException {
 		Statement s = conn.createStatement ();
 		Scanner scanner = new Scanner( System.in );
-		System.out.print("You're going to be removing a studet from an organization.\n");
+		System.out.print("You're going to be removing a student from an organization.\n");
 		System.out.print("Below are the current organizations and their perspective ids.\n");
 
 		//Printing current organizations they selected assuming this works
@@ -134,8 +145,8 @@ public class PartFive
 	   boolean keepGoing = true;
 	   Scanner inputer = new Scanner(System.in);
 	   while(keepGoing) {
-		   System.out.println("1. List all organizations and their corresponding students.");
-		   System.out.println("2. Figure out who a student's advisor is.");
+		   System.out.println("1. List all organizations and their corresponding leaders.");
+		   System.out.println("2. List all student's and their Advisor's name.");
 		   System.out.println("3. Remove a student from a class.");
 		   System.out.println("4. Alter all faculty's salary by a certain percentage.");
 		   System.out.println("5. Add a student to the database.");
