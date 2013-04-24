@@ -145,15 +145,15 @@ public class PartFive
 		   System.out.print("Please enter an option: ");
 		   
 		   //Get the input and execute accordingly
-		   int in = inputer.nextInt();
+		   String in = inputer.nextLine();
 		   try {
 			   switch(in) {
-				   case 1: one(conn);			break;
-				   case 2: two(conn); 			break;
-				   case 3: three(conn); 		break;
-				   case 4: four(conn); 			break;
-				   case 5: five(conn); 			break;
-				   case 6: keepGoing = false; 	break;
+				   case "1": one(conn);				break;
+				   case "2": two(conn); 			break;
+				   case "3": three(conn); 			break;
+				   case "4": four(conn); 			break;
+				   case "5": five(conn); 			break;
+				   case "6": keepGoing = false; 	break;
 			   }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
