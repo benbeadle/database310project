@@ -107,10 +107,126 @@ public class PartFive
 		scanner.close();
 	}
 	public static void four(Connection conn) throws SQLException {
+		String percentage = "0";
+		String facultyid = "-1";
+		String upperfacultyid = "-1";
+		int option = 0;
 		
+       try
+       {
+			//Get desired action and parameters
+    	   Scanner input = new Scanner(System.in);
+
+			System.out.println("Options:\n	1:  Alter salary of a specific faculty id\n	2:  Alter salary of a specific range of faculty ids\n	3:  Give a sweeping raise/cut to all faculty");
+			option = input.nextInt();
+			if(option == 1){
+				System.out.println("Enter ID of faculty member");
+				facultyid = input.next();
+			}else if(option == 2){
+				System.out.println("Enter lower bounding ID");
+				facultyid = input.next();
+				System.out.println("Enter upper bounding ID");
+				upperfacultyid = input.next();
+			}else if(option > 3){
+				System.out.println("Invalid option");
+				return;
+			}
+			
+			System.out.println("Enter percentage change salary by");
+			percentage = input.next();
+			percentage = percentage.replace("%", "");
+			
+			//Assemble the SQL command
+			PreparedStatement s;
+			if(option == 1){
+				s = conn.prepareStatement("UPDATE Faculty SET Salary = (Salary + Salary * ? / 100) WHERE FacultyID = ?");
+				s.setInt(2, Integer.parseInt(facultyid));
+			}else if(option == 2){
+				s = conn.prepareStatement("UPDATE Faculty SET Salary = (Salary + Salary * ? / 100) WHERE FacultyID >= ? AND FacultyID <= ?");
+				s.setInt(2, Integer.parseInt(facultyid));
+				s.setInt(3, Integer.parseInt(upperfacultyid));
+			}else{
+				s = conn.prepareStatement("UPDATE Faculty SET Salary = (Salary + Salary * ? / 100)");
+			}
+			
+			int modCount = 0;
+			s.setString(1, percentage);
+			modCount = s.executeUpdate();	//execute the command and find how many rows were altered
+			s.close();
+			
+			//instruct the user of success or failure
+			if(modCount == 0)
+				System.out.println("No faculty found with that id");
+			else
+				System.out.println(modCount + " row(s) modified");
+
+			input.close();
+       }
+       catch (SQLException sql){
+    	   System.err.println(sql.getSQLState());
+    	   
+       }
+       catch (Exception e)
+       {
+           System.err.println ("Some random error occured");
+       }
 	}
 	public static void five(Connection conn) throws SQLException {
+		int UIN;
+		String student;
+		String major;
+			
 		
+		try{
+			//Get the student's information from the user
+			Scanner input = new Scanner(System.in);
+			System.out.println("Enter the name of the student you wish to add");
+			student = input.nextLine();
+			System.out.println("What is the student's major?");
+			major = input.next();
+						
+			//Assigne the student's UIN
+			PreparedStatement s;
+			s = conn.prepareStatement("SELECT MAX(UIN) AS UIN FROM Student");
+			s.execute();
+			ResultSet results = s.getResultSet();
+			results.next();
+			UIN = results.getInt("UIN");
+			UIN++;							//increment the UIN to get the next student's id;
+			System.out.println(student + " has been assigned UIN " + UIN);
+			
+			int advisorid;
+			String advisor;	
+			//Choose an advisor for the student
+			s = conn.prepareStatement("SELECT FacultyID FROM Teaches WHERE Subject = '" + major + "' ORDER BY RAND() LIMIT 1");
+			s.execute();
+			results = s.getResultSet();
+			results.next();
+			advisorid = results.getInt("FacultyID");
+			
+			//Fetch the name of the advisor, for our own knowledge
+			s = conn.prepareStatement("SELECT Name FROM Faculty WHERE FacultyID = " + advisorid);
+			s.execute();
+			results = s.getResultSet();
+			results.next();
+			advisor = results.getString("Name");
+			System.out.println(student + " has been assigned" + advisor + " as an advisor");
+			
+			//Actually insert the student into the system
+			s = conn.prepareStatement("INSERT INTO Student VALUES (" + UIN + ", '" + student + "', '" + major +  "', " + advisorid  + ")");
+			
+			s.execute();
+			
+			results.close();
+			s.close();
+		}
+		catch (SQLException sql){
+			System.err.println(sql.getSQLState());
+	    }
+		catch(Exception e)
+		{
+			System.err.println("Some problem occured");
+		}
 	}
 	
 	
